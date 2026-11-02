@@ -1,0 +1,15 @@
+# Render > New > Blueprint will read this config from the GitHub repository.
+# WebSocket game rooms live in memory; keep exactly one running instance.
+services:
+  - type: web
+    runtime: node
+    name: mushroom-forest-rpg
+    plan: free
+    region: singapore
+    buildCommand: npm install --omit=dev --ignore-scripts
+    startCommand: npm start
+    healthCheckPath: /health
+    autoDeployTrigger: commit
+    envVars:
+      - key: NODE_ENV
+        value: production
